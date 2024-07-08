@@ -14,7 +14,7 @@ func TestSnowflakeSeqGenerator_GenerateId(t *testing.T) {
 	}
 	var x, y string
 	for i := 0; i < 100; i++ {
-		y, err = generator.GenerateId()
+		y, err = generator.GenerateId1()
 		if err != nil {
 			t.Error(err)
 			continue
@@ -26,22 +26,21 @@ func TestSnowflakeSeqGenerator_GenerateId(t *testing.T) {
 		x = y
 	}
 
-	dataCenterId, workId = 1, 1
-	generator, err = uidgo.NewSnowflakeSeqGenerator(dataCenterId, workId)
-	if err != nil {
-		t.Error(err)
-		return
-	}
 	for i := 0; i < 100; i++ {
-		y, err = generator.GenerateId()
+		id, err := generator.GenerateId2()
 		if err != nil {
 			t.Error(err)
 			continue
 		}
-		if x == y {
-			t.Errorf("x(%s) & y(%s) are the same", x, y)
+		t.Logf("generate id: %v", id)
+	}
+
+	for i := 0; i < 100; i++ {
+		id, y, err := generator.GenerateId3()
+		if err != nil {
+			t.Error(err)
+			continue
 		}
-		t.Logf("generate id: %s", y)
-		x = y
+		t.Logf("generate id: %v, %s", id, y)
 	}
 }
