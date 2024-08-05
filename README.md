@@ -1,2 +1,2 @@
 # uid-go
-snow falke uid algorithm implements in golang 
+snow flake uid algorithm implements in golang 
