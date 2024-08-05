@@ -54,12 +54,12 @@ type SnowflakeSeqGenerator struct {
 func NewSnowflakeSeqGenerator(dataCenterId, workId int64) (r *SnowflakeSeqGenerator, err error) {
 	if dataCenterId < 0 || dataCenterId > dataCenterIdMaxValue {
 		err = fmt.Errorf("dataCenterId should between 0 and %d", dataCenterIdMaxValue-1)
-		return
+		return nil, err
 	}
 
 	if workId < 0 || workId > workerIdMaxValue {
 		err = fmt.Errorf("workId should between 0 and %d", dataCenterIdMaxValue-1)
-		return
+		return nil, err
 	}
 
 	return &SnowflakeSeqGenerator{
